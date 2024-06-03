@@ -4,16 +4,19 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
-#include "Trigger.generated.h"
+#include "Door.generated.h"
+
+// 전방 선언
+class ATrigger;
 
 UCLASS()
-class INTROPROJECT_API ATrigger : public AActor
+class INTROPROJECT_API ADoor : public AActor
 {
 	GENERATED_BODY()
 	
 public:	
 	// Sets default values for this actor's properties
-	ATrigger();
+	ADoor();
 
 protected:
 	// Called when the game starts or when spawned
@@ -23,7 +26,10 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
-	// Unlock 변수
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Trigger")
-	bool Unlock;
+	// Trigger 클래스를 참조할 변수
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Door")
+	ATrigger* TriggerActor;
+
+	// Unlock 상태를 확인하는 함수
+	void CheckUnlock();
 };
